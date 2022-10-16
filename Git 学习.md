@@ -42,3 +42,42 @@
   - 若产生冲突，则手动合并，然后git add 文件名：添加到暂存区
   - git commit -m 合并名称：注意此时不能带文件名
   - 切换分支的本质就是移动 HEAD 指针
+
+
+
+### 上传文件到github
+
+1. git init：初始化仓库
+
+2. git remote add origin https://github.com/725423/study-files.git ：建立远程连接
+
+3. git branch -M main：设置分支
+
+4. git push -u origin main：推送到github、 origin:远程仓库的名称（远程仓库连接可在config中查看）
+
+5. 第4步会报一个错误
+
+   1. ```powershell
+      $ git push -u origin main
+      fatal: 响应状态代码不指示成功: 406 (Not Acceptable)。
+      remote: Support for password authentication was removed on August 13, 2021.
+      remote: Please see https://docs.github.com/en/get-started/getting-started-with-git/about-remote-repositories#cloning-with-https-urls for information on currently recommended modes of authentication.
+      fatal: Authentication failed for 'https://github.com/725423/study-files.git/'
+      
+      
+      解释：Support for password authentication was removed on August 13, 2021：已于 2021 年 8 月 13 日删除了对密码身份验证的支持
+      方法：使用token登录
+      ```
+
+6. 参考https://blog.csdn.net/qq_42592823/article/details/123913963
+
+7. 然后执行指令：git remote set-url origin https://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@github.com/725423/study-files.git ：origin：远程仓库名称、 http://token命令@github.com/仓库用户名/仓库名.git
+
+8. git push -u origin main : 将远程仓库内容推送到GitHub，main：分支名
+
+
+
+
+
+
+

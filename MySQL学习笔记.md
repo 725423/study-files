@@ -87,11 +87,24 @@ show create database yiibaidb
                 AFTER 字段名          -- 表示增加在该字段名后面
                 FIRST               -- 表示增加在第一个
             ADD PRIMARY KEY(字段名)   -- 创建主键
+            
             ADD UNIQUE [索引名] (字段名)-- 创建唯一索引
+            alter table em add unique name_unique(name)
+            
             ADD INDEX [索引名] (字段名) -- 创建普通索引
+            alter table em add index add_index(salary)
+            
             DROP[ COLUMN] 字段名      -- 删除字段
+            
             MODIFY[ COLUMN] 字段名 字段属性     -- 支持对字段属性进行修改，不能修改字段名(所有原有属性也需写上)
+            alter table em modify id int not null auto_increment
+            
             CHANGE[ COLUMN] 原字段名 新字段名 字段属性      -- 支持对字段名修改
+            alter table em change address_1 address char(50) not null
+            
+            add constraint 外键名 foreign key(外键字段名) references 外表表名(对应表的主键字段名)
+            alter table results add constraint fk_student foreign key(id) references students(id)
+            
             DROP PRIMARY KEY    -- 删除主键(删除主键前需删除其AUTO_INCREMENT属性)
             DROP INDEX 索引名 -- 删除索引
             DROP FOREIGN KEY 外键    -- 删除外键
@@ -125,16 +138,22 @@ show create database yiibaidb
         -- 可同时插入多条数据记录！
         REPLACE与INSERT类似，唯一的区别是对于匹配的行，现有行（与主键/唯一键比较）的数据会被替换，如果没有现有行，则插入新行。
     INSERT [INTO] 表名 SET 字段名=值[, 字段名=值, ...]
+    insert into students(id,name,sex,age) values (2,'李四','男',17),(3,'王五','男',19),(4,'赵六','男',15)
+    
 -- 查
     SELECT 字段列表 FROM 表名[ 其他子句]
         -- 可来自多个表的多个字段
         -- 其他子句可以不使用
         -- 字段列表可以用*代替，表示所有字段
+        
 -- 删
     DELETE FROM 表名[ 删除条件子句]
         没有条件子句，则会删除全部
+        delete from students where id = 4
+        
 -- 改
     UPDATE 表名 SET 字段名=新值[, 字段名=新值] [更新条件]
+    update students set name = '赵丽' where id = 2
 ```
 
 
@@ -262,12 +281,21 @@ enum(val1, val2, val3...)
     表现为字符串类型，存储却是整型。
     NULL值的索引是NULL。
     空字符串错误值的索引值是0。
+    create table student_1(
+			id int not null primary key auto_increment,
+			sex enum('男','女')
+)
+    
 -- 集合（set） ----------
 set(val1, val2, val3...)
     create table tab ( gender set('男', '女', '无') );
     insert into tab values ('男, 女');
     最多可以有64个不同的成员。以bigint存储，共8个字节。采取位运算的形式。
     当创建表时，SET成员值的尾部空格将自动被删除。
+    create table student(
+			id int not null primary key auto_increment,
+			sex set('男','女')
+)
 ```
 
 ### 
@@ -384,7 +412,7 @@ c. WHERE 子句
             is/is not 加上ture/false/unknown，检验某个值的真假
             <=>与<>功能相同，<=>可用于null比较
 d. GROUP BY 子句, 分组子句
-    GROUP BY 字段/别名 [排序方式]
+    GROUP BY 字段/别名 [排序方式]	
     分组后会进行排序。升序：ASC，降序：DESC
     以下[合计函数]需配合 GROUP BY 使用：
     count 返回不同的非NULL值数目  count(*)、count(字段)
