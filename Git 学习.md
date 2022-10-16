@@ -44,7 +44,6 @@
   - 切换分支的本质就是移动 HEAD 指针
 
 
-
 ### 上传文件到github
 
 1. git init：初始化仓库
@@ -74,10 +73,3 @@
 7. 然后执行指令：git remote set-url origin https://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@github.com/725423/study-files.git ：origin：远程仓库名称、 http://token命令@github.com/仓库用户名/仓库名.git
 
 8. git push -u origin main : 将远程仓库内容推送到GitHub，main：分支名
-
-
-
-
-
-
-
