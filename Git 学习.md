@@ -73,3 +73,16 @@
 7. 然后执行指令：git remote set-url origin https://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@github.com/725423/study-files.git ：origin：远程仓库名称、 http://token命令@github.com/仓库用户名/仓库名.git
 
 8. git push -u origin main : 将远程仓库内容推送到GitHub，main：分支名
+
+
+### 更新操作
+
+- git commit : 查看哪些修改得没提交
+- git add . :全部提交
+- git commit -am '新增文件'：提交新增的
+- git remote set-url origin https://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@github.com/725423/study-files.git
+- git push -u origin master
+
+
+
+
