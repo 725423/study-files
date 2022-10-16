@@ -38,3 +38,11 @@ select uuid,mobile,IFNULL(birthday, "0") as "birthday" from user where mobile="5
 select * IFNULL(birthday, "0") from user where mobile="53437569"
 ```
 
+
+
+### 添加一个字段
+
+```sql
+alter table name add id int(11)
+```
+

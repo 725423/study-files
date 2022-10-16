@@ -490,6 +490,11 @@ redis-server：Redis服务器启动命令
 
 
 
+### 出现中文乱码时
+
+- 连接时使用：redis-cli --raw
+
+
 
 
 
